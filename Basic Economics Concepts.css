@@ -1,0 +1,37 @@
+body{
+background-image: url();
+background-attachment: fixed;
+background-repeat: no-repeat;
+background-size: cover; 
+font-family:Georgia,serif; 
+font-style: italic;
+font-weight: 900;
+}
+    
+    
+
+h1{
+    font-family: Georgia, serif; 
+    font-size: 20pt; 
+    font-weight: bolder;
+    font-style: italic; 
+    font-variant-alternates: normal; 
+    font-variant-east-asian: normal; 
+    font-variant-numeric: normal; 
+    font-variant-position: normal; 
+    font-weight: 1000; vertical-align: baseline; 
+    white-space-collapse: preserve;
+    text-align: center;
+}
+
+main{ 
+    color: black;
+font-family:Georgia,serif; 
+font-style: italic;
+font-weight: 900;}
+
+footer{ text-align: right;
+
+}
+
+
