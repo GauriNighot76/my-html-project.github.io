@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Demand Elasticity</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <canvas id="myChart" width="600" height="400"></canvas>
+    <input type="range" id="priceRange" min="0" max="100" value="50">
+    <p id="demandType">Demand Type: Unitary Elastic</p>
+
+    <script>
+        const ctx = document.getElementById('myChart').getContext('2d');
+
+        // Initial data setup
+        const data = {
+            labels: ['A', 'B', 'C', 'D', 'E'],
+            datasets: [{
+                label: 'Demand Curve',
+                data: [50, 40, 30, 20, 10], // Default data for unitary elastic demand
+                borderColor: 'rgba(75, 192, 192, 1)',
+                borderWidth: 2,
+                fill: false,
+                tension: 0.1
+            }]
+        };
+
+        const options = {
+            responsive: true,
+            interaction: {
+                mode: 'index',
+                intersect: false,
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        };
+
+        const myChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+
+        // Function to update the chart based on the slider value
+        const updateChart = (value) => {
+            let demandType;
+            let newData;
+
+            if (value < 25) {
+                demandType = 'Perfectly Elastic Demand';
+                newData = [50, 50, 50, 50, 50]; // Perfectly elastic: horizontal line
+            } else if (value < 50) {
+                demandType = 'Imperfectly Elastic Demand';
+                newData = [50, 40, 30, 20, 10]; // Imperfectly elastic: standard line
+            } else if (value < 75) {
+                demandType = 'Unitary Elastic Demand';
+                newData = [50, 40, 30, 20, 10]; // Unitary elastic: same as default
+            } else if (value < 100) {
+                demandType = 'Relatively Elastic Demand';
+                newData = [50, 30, 20, 10, 5]; // Relatively elastic: steeper line
+            } else {
+                demandType = 'Relatively Inelastic Demand';
+                newData = [50, 45, 40, 35, 30]; // Relatively inelastic: less steep line
+            }
+
+            myChart.data.datasets[0].data = newData;
+            myChart.update();
+
+            document.getElementById('demandType').innerText = `Demand Type: ${demandType}`;
+        };
+
+        // Slider event listener
+        document.getElementById('priceRange').addEventListener('input', (event) => {
+            updateChart(event.target.value);
+        });
+
+    </script>
+</body>
+</html>
